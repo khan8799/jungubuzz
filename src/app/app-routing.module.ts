@@ -1,3 +1,4 @@
+import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'email-signup',
     component: EmailSignupComponent
+  },
+  {
+    path: 'payment-gateway',
+    component: PaymentGatewayComponent
   }
 ];
 

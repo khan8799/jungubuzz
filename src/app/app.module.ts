@@ -22,8 +22,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { EmailLoginComponent } from './login-method/email-login/email-login.component';
 import { EmailSignupComponent } from './login-method/email-signup/email-signup.component';
+import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     LoginComponent,
     HomeComponent,
     EmailLoginComponent,
-    EmailSignupComponent
+    EmailSignupComponent,
+    PaymentGatewayComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
 
     NgxUiLoaderModule,
+    NgxPayPalModule,
   ],
   providers: [
     AuthService,
