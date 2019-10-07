@@ -1,7 +1,9 @@
 
 <div class="row justify-content-md-center">
   <div class="col-md-6 md-offset-3">
-    <form [formGroup]="phoneForm" (ngSubmit)="phoneLogin()">
+    <div id="firebaseUiContainer" class="auth-container"></div>
+
+    <!-- <form [formGroup]="phoneForm" (ngSubmit)="phoneLogin()">
       <div class="form-group" *ngIf="phoneInput">
         <label for="">Phone number</label>
         <input type="text" class="form-control" placeholder="Enter phone" formControlName="phone">
@@ -14,6 +16,6 @@
       </div>
       <div  class="form-group" id="recaptcha-container"></div>
       <button type="submit" class="btn btn-primary">login</button>
-    </form>
+    </form> -->
   </div>
 </div>

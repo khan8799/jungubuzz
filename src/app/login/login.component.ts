@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { AppUser } from './../models/app-user';
 import { AlertifyService } from '../services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +14,22 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private route: Router,
   ) { }
 
   socialLogin(socialLoginMethod: string) {
     this.auth.socialLogin(socialLoginMethod).then(
-      res => console.log(res),
+      res => this.route.navigate(['/home']),
       err => this.alertify.error(err.message)
     );
   }
 
   ngOnInit() {
     this.auth.appUser$.subscribe(appUser => {
-      this.appUser = appUser;
+      if (appUser) {
+        this.route.navigate(['/home']);
+      }
     });
   }
 

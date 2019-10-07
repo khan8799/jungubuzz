@@ -26,6 +26,7 @@ import { EmailSignupComponent } from './login-method/email-signup/email-signup.c
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { PhoneLoginComponent } from './login-method/phone-login/phone-login.component';
 import { PhoneSignupComponent } from './login-method/phone-signup/phone-signup.component';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PhoneSignupComponent } from './login-method/phone-signup/phone-signup.c
     EmailLoginComponent,
     EmailSignupComponent,
     PhoneLoginComponent,
-    PhoneSignupComponent
+    PhoneSignupComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

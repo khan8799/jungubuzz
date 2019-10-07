@@ -6,6 +6,8 @@ import { EmailLoginComponent } from './login-method/email-login/email-login.comp
 import { EmailSignupComponent } from './login-method/email-signup/email-signup.component';
 import { PhoneLoginComponent } from './login-method/phone-login/phone-login.component';
 import { PhoneSignupComponent } from './login-method/phone-signup/phone-signup.component';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const routes: Routes = [
@@ -39,6 +41,11 @@ const routes: Routes = [
   {
     path: 'phone-signup',
     component: PhoneSignupComponent
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
+    // canActivate: [AuthGuardService]
   }
 ];
 
