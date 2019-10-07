@@ -1,0 +1,24 @@
+
+
+  <div class="text-center">
+    <h1>Login By...</h1>
+    <button (click)="socialLogin('google')" class="btn btn-outline-danger">
+        <i class="fa fa-google"></i>
+    </button>
+
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/facebook-login']">
+      <i class="fa fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="btn btn-outline-info" [routerLink]="['/twitter-login']">
+      <i class="fa fa-twitter"></i>
+    </button>
+
+    <button type="button" class="btn btn-outline-dark" [routerLink]="['/email-login']">
+      <i class="fa fa-envelope"></i>
+    </button>
+
+    <button type="button" class="btn btn-outline-dark" [routerLink]="['/phone-login']">
+      <i class="fa fa-phone"></i>
+    </button>
+  </div>

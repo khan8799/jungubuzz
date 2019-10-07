@@ -1,0 +1,48 @@
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-6 md-offset-3">
+      <form [formGroup]="emailSignupForm" (ngSubmit)="emailSignup()">
+        <div class="form-group">
+          <label for="">Email address</label>
+          <input type="email" class="form-control" placeholder="Enter email" formControlName="email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div *ngIf="emailSignupForm.controls['email'].invalid && (emailSignupForm.controls['email'].dirty || emailSignupForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="emailSignupForm.controls['email'].errors.required">
+            Email is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Password</label>
+          <input type="password" class="form-control" placeholder="Password" formControlName="password" (change)="onPasswordChange()">
+        </div>
+        <div *ngIf="emailSignupForm.controls['password'].invalid && (emailSignupForm.controls['password'].dirty || emailSignupForm.controls['password'].touched)" class="alert alert-danger">
+          <div *ngIf="emailSignupForm.controls['password'].errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="confirm_password.hasError('mismatch')">
+            Password do not match.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Confirm Password</label>
+          <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirm_password" (change)="onPasswordChange()">
+        </div>
+        <div *ngIf="emailSignupForm.controls['confirm_password'].invalid && (emailSignupForm.controls['confirm_password'].dirty || emailSignupForm.controls['confirm_password'].touched)" class="alert alert-danger">
+          <div *ngIf="emailSignupForm.controls['confirm_password'].errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="confirm_password.hasError('mismatch')">
+            Password do not match.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!emailSignupForm.valid || confirm_password.hasError('mismatch')">create account</button>
+        <span> Already have an account? <a [routerLink]="['/email-login']"> log in</a></span>
+      </form>
+    </div>
+
+
