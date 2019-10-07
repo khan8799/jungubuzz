@@ -2,6 +2,7 @@ import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppUser } from '../models/app-user';
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-header',
@@ -12,12 +13,19 @@ import { AppUser } from '../models/app-user';
 export class HeaderComponent implements OnInit {
   appUser: AppUser;
 
-  constructor(public auth: AuthService, private router: Router) { }
+  constructor(
+    public auth: AuthService,
+    private alertify: AlertifyService,
+    private router: Router,
+  ) { }
 
   logout() {
     this.auth.logout().then(
-      res => this.router.navigate(['/login']),
-      err => console.log(err)
+      res => {
+        this.alertify.success('You have successfully logged out !!!');
+        this.router.navigate(['/login']);
+      },
+      err => this.alertify.error(err)
     );
   }
 
