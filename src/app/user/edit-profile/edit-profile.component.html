@@ -4,8 +4,13 @@
 
   <form [formGroup]="userEditProfileForm" (ngSubmit)="editProfile()">
     <div class="row justify-content-md-center">
-      <div class="col-md-3 image">
+      <div class="col-md-3 img-container">
         <img [src]="user?.photoURL" alt="" class="img img-responsive img-round" width="270px" height="270px">
+        <div class="middle">
+          <div class="text">
+            <a href=""><i class="fa fa-upload"></i>  change picture</a>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
         <div class="form-row">
@@ -101,7 +106,7 @@
             type="submit"
             class="btn btn-outline-primary"
             [disabled]="!userEditProfileForm.dirty">
-              Edit Profile
+              <i class="fa fa-edit"></i> Edit Profile
           </button>
           <button type="submit" class="btn btn-secondary" routerLink="/home">Cancel</button>
       </div>
