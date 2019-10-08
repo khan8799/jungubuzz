@@ -6,7 +6,7 @@
 
       <span class="dropdown" *ngIf="appUser else anonymousUser">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ appUser.name || appUser.email || appUser }}
+          {{ appUser.name || 'User' }}
         </button>
         <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink="edit-profile">Edit Profile</a>
