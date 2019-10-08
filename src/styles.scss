@@ -7,3 +7,18 @@ $fa-font-path: "../node_modules/font-awesome/fonts";
 button {
   margin: 5px;
 }
+
+body a {
+  font-size: 14px;
+  color: #6c757d !important;
+  text-decoration: none !important;
+  -webkit-transition: color 0.5s, font-size 0.5s;
+  -moz-transition: color 0.5s, font-size 0.5s;
+  -o-transition: color 0.5s, font-size 0.5s;
+  transition: color 0.5s, font-size 0.5s;
+}
+
+a:hover {
+  font-size: 15px;
+  color: #545b62 !important;
+}

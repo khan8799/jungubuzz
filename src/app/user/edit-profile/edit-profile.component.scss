@@ -1,4 +1,49 @@
-.image, img {
+.img-container, img {
   border-radius: 4px;
   text-align: center;
+}
+
+.img-container {
+  position: relative;
+  width: 50%;
+}
+
+.img {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.img-container:hover .img {
+  opacity: 0.2;
+}
+
+.img-container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: white;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.text a {
+  color: white;
+  font-weight: bold;
 }
