@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'jungubuzz.firebaseapp.com',
     databaseURL: 'https://jungubuzz.firebaseio.com',
     projectId: 'jungubuzz',
-    storageBucket: '',
+    storageBucket: 'gs://jungubuzz.appspot.com/',
     messagingSenderId: '871684382213',
     appId: '1:871684382213:web:37ea6007a01dc7d3'
   }

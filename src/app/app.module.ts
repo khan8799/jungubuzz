@@ -57,7 +57,7 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
   ],
   providers: [
     AuthService,
-    UserService
+    UserService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
+
   <div class="text-center pb-4">
     <h1>Edit your profile...</h1>
   </div>
@@ -5,15 +6,17 @@
     <div class="row justify-content-md-center">
 
       <!-- Image Container -->
-      <div class="col-md-3  col-sm-12 col-xs-12 img-container">
-        <img [src]="user?.photoURL" alt="" class="img img-responsive img-round" width="270px" height="270px">
+      <div class="col-md-3  col-sm-12 col-xs-12 img-container mb-4">
+        <img [src]="imageURL" alt="" class="img img-responsive">
         <div class="middle">
-          <div class="text">
-            <button class="btn btn-outline-primary" (click)="fileInput.click()"><i class="fa fa-upload"></i>  change picture</button>
-          </div>
+          <input
+            style="display:none;"
+            type="file"
+            (change)="onFileInput($event)"
+            accept="image/x-png,image/gif,image/jpeg"
+            #fileInput />
+          <button class="btn btn-outline-primary" (click)="fileInput.click()"><i class="fa fa-upload"></i>  change picture</button>
         </div>
-
-        <input #fileInput type="file" (change)="onFileInput($event)" accept="image/x-png,image/gif,image/jpeg" style="display:none;" />
       </div>
       <!-- Image Container ENDS -->
 
@@ -111,13 +114,13 @@
             </div>
 
             <div class="col-md-12">
-                <button
-                  type="submit"
-                  class="btn btn-outline-primary"
-                  [disabled]="!userEditProfileForm.dirty">
-                    <i class="fa fa-edit"></i> Edit Profile
-                </button>
-                <button type="submit" class="btn btn-secondary" routerLink="/home">Cancel</button>
+              <button
+                type="submit"
+                class="btn btn-outline-primary"
+                [disabled]="!userEditProfileForm.dirty">
+                  <i class="fa fa-edit"></i> Edit Profile
+              </button>
+              <button type="submit" class="btn btn-secondary" routerLink="/home">Cancel</button>
             </div>
           </div>
 
