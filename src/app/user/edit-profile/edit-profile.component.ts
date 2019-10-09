@@ -81,12 +81,12 @@ export class EditProfileComponent implements OnInit {
 
     this.userService.update(this.userDetail).then(
       res => {
-        this.alertify.success('Profile edited successfully !!!');
         this.ngxLoader.stop();
+        this.alertify.success('Profile edited successfully !!!');
       },
       err => {
-        this.alertify.error(err.message);
         this.ngxLoader.stop();
+        this.alertify.error(err.message);
       }
     );
   }
