@@ -91,4 +91,8 @@ export class EditProfileComponent implements OnInit {
     );
   }
 
+  onFileInput(ev) {
+    console.log('clicked');
+  }
+
 }
