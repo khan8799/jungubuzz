@@ -38,14 +38,14 @@ export class EditProfileComponent {
     private ngxLoader: NgxUiLoaderService,
     private storage: AngularFireStorage,
   ) {
-    this.ngxLoader.start();
+    this.ngxLoader.start('user-detail');
     this.auth.user$.subscribe(
       res => {
         this.user = res;
         this.getUserDetail();
       },
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('user-detail');
         this.alertify.error(err.message);
       }
     );
@@ -60,18 +60,18 @@ export class EditProfileComponent {
             this.imageURL = this.userDetail.photoURL;
           else
             this.imageURL = this.user.photoURL;
-          this.ngxLoader.stop();
+          this.ngxLoader.stop('user-detail');
           },
         err => {
           this.alertify.error(err.message);
-          this.ngxLoader.stop();
+          this.ngxLoader.stop('user-detail');
         }
       );
     }
   }
 
   editProfile() {
-    this.ngxLoader.start();
+    this.ngxLoader.start('edit-profile');
 
     const formData = this.userEditProfileForm.value;
 
@@ -79,7 +79,7 @@ export class EditProfileComponent {
       uid:          this.user.uid,
       displayName:  this.user.displayName,
       email:        this.user.email,
-      photoURL:     this.userDetail.photoURL ? this.userDetail.photoURL : this.user.photoURL,
+      photoURL:     this.imageURL,
       isAdmin:      this.userDetail.isAdmin,
       name:         formData.name ? formData.name : this.userDetail.name,
       phoneNumber:  formData.phoneNumber ? formData.phoneNumber : this.userDetail.phoneNumber,
@@ -92,11 +92,11 @@ export class EditProfileComponent {
 
     this.userService.update(this.userDetail).then(
       res => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('edit-profile');
         this.alertify.success('Profile edited successfully !!!');
       },
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('edit-profile');
         this.alertify.error(err.message);
       }
     );
@@ -106,7 +106,7 @@ export class EditProfileComponent {
     this.userPicture = ev.target.files[0];
 
     if (this.userPicture !== undefined) {
-      this.ngxLoader.start();
+      this.ngxLoader.start('upload-image');
       this.uploadFile();
     }
   }
@@ -121,7 +121,7 @@ export class EditProfileComponent {
     task.snapshotChanges().subscribe(
       res => res,
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('upload-image');
         this.alertify.error(err.message);
       },
       () => this.showUpdatedImage()
@@ -135,7 +135,7 @@ export class EditProfileComponent {
         this.updateImageURL();
       },
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('upload-image');
         this.alertify.error(err.message);
       }
     );
@@ -145,31 +145,31 @@ export class EditProfileComponent {
     this.userDetail.photoURL = this.imageURL;
     this.userService.update(this.userDetail).then(
       res => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('upload-image');
         this.alertify.success('Profile picture changed successfully !!!');
       },
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('upload-image');
         this.alertify.error(err.message);
       }
     );
   }
 
   checkExist() {
-    this.ngxLoader.start();
+    this.ngxLoader.start('check-exist');
     const phone = this.userEditProfileForm.value.phoneNumber;
     this.userService.checkExist('phoneNumber', phone).subscribe(
       res => {
         console.log(res);
         if (res.length > 0) {
-          this.ngxLoader.stop();
+          this.ngxLoader.stop('check-exist');
           this.alertify.error('OOPS!!! This ' + phone + ' mobile number is already in use by another user');
         } else {
           this.editProfile();
         }
       },
       err => {
-        this.ngxLoader.stop();
+        this.ngxLoader.stop('check-exist');
         this.alertify.error(err.message);
       }
     );
