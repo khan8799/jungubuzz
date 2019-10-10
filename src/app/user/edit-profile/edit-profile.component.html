@@ -15,7 +15,8 @@
             (change)="onFileInput($event)"
             accept="image/x-png,image/gif,image/jpeg"
             #fileInput />
-          <button class="btn btn-outline-primary" (click)="fileInput.click()"><i class="fa fa-upload"></i>  change picture</button>
+          <button class="btn btn-outline-primary" (click)="fileInput.click()">
+            <i class="fa fa-upload"></i>  change picture</button>
         </div>
       </div>
       <!-- Image Container ENDS -->
@@ -58,7 +59,8 @@
                     class="form-control"
                     id="phoneNumber"
                     placeholder="+918840002768"
-                    formControlName="phoneNumber">
+                    formControlName="phoneNumber"
+                    (blur)="checkExist()">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="gender">Gender</label>

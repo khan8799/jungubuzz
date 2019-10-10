@@ -24,7 +24,13 @@ export class AppComponent {
         return;
       }
 
-      this.userService.save(user);
+      this.userService.checkUserExist(user.uid).subscribe(
+        userExist => {
+          if (!userExist)
+            this.userService.create(user);
+        },
+        err => console.log(err)
+      );
 
       const returnUrl = localStorage.getItem('returnUrl');
       if (!returnUrl) {

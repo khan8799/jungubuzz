@@ -17,12 +17,17 @@ export class UserService {
     return this.db.object('/users/' + uid);
   }
 
-  save(user: firebase.User) {
+  create(user: firebase.User) {
     this.db.object('/users/' + user.uid).update({
       displayName: user.displayName,
       email: user.email,
       isAdmin: false,
+      photoURL: user.photoURL,
     });
+  }
+
+  checkUserExist(uid: string): Observable<any> {
+    return this.db.object('/users/' + uid).valueChanges();
   }
 
   update(userData: UserDetail): Promise<any> {

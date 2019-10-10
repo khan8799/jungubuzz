@@ -29,7 +29,8 @@ export class EditProfileComponent {
 
   userPicture: File;
   fileRef: AngularFireStorageReference;
-  imageURL: string;
+  imageURL = '../../../assets/img/loader.gif';
+  phoneExist = false;
 
   constructor(
     private auth: AuthService,
@@ -38,14 +39,12 @@ export class EditProfileComponent {
     private ngxLoader: NgxUiLoaderService,
     private storage: AngularFireStorage,
   ) {
-    this.ngxLoader.start('user-detail');
     this.auth.user$.subscribe(
       res => {
         this.user = res;
         this.getUserDetail();
       },
       err => {
-        this.ngxLoader.stop('user-detail');
         this.alertify.error(err.message);
       }
     );
@@ -56,50 +55,72 @@ export class EditProfileComponent {
       this.userService.get(this.user.uid).valueChanges().subscribe(
         res => {
           this.userDetail = res;
-          if (this.userDetail.photoURL !== '')
+          this.userDetail.uid = this.user.uid;
+          if (this.userDetail.photoURL)
             this.imageURL = this.userDetail.photoURL;
-          else
+          else if (this.user.photoURL)
             this.imageURL = this.user.photoURL;
-          this.ngxLoader.stop('user-detail');
           },
         err => {
           this.alertify.error(err.message);
-          this.ngxLoader.stop('user-detail');
         }
       );
     }
   }
 
-  editProfile() {
-    this.ngxLoader.start('edit-profile');
+  checkExist() {
+    const phone = this.userEditProfileForm.value.phoneNumber;
 
-    const formData = this.userEditProfileForm.value;
-
-    this.userDetail = {
-      uid:          this.user.uid,
-      displayName:  this.user.displayName,
-      email:        this.user.email,
-      photoURL:     this.imageURL,
-      isAdmin:      this.userDetail.isAdmin,
-      name:         formData.name ? formData.name : this.userDetail.name,
-      phoneNumber:  formData.phoneNumber ? formData.phoneNumber : this.userDetail.phoneNumber,
-      gender:       formData.gender ? formData.gender : this.userDetail.gender,
-      address:      formData.address ? formData.address : this.userDetail.address,
-      city:         formData.city ? formData.city : this.userDetail.city,
-      state:        formData.state ? formData.state : this.userDetail.state,
-      zip:          formData.zip ? formData.zip : this.userDetail.zip,
-    };
-
-    this.userService.update(this.userDetail).then(
+    this.userService.checkExist('phoneNumber', phone).subscribe(
       res => {
-        this.ngxLoader.stop('edit-profile');
-        this.alertify.success('Profile edited successfully !!!');
+        this.phoneExist = false;
+        res.forEach(user => {
+          if (user.key !== this.user.uid)
+            this.phoneExist = true;
+        });
+
+        if (this.phoneExist)
+          this.alertify.error('This ' + phone + ' mobile number is already in use by another number');
       },
       err => {
-        this.ngxLoader.stop('edit-profile');
         this.alertify.error(err.message);
       }
     );
+  }
+
+  editProfile() {
+    const formData = this.userEditProfileForm.value;
+
+    if (this.phoneExist)
+      this.alertify.error('This ' + formData.phoneNumber + ' mobile number is already in use by another number');
+    else {
+      this.ngxLoader.start();
+      this.userDetail = {
+        uid:          this.user.uid,
+        displayName:  this.user.displayName,
+        email:        this.user.email,
+        photoURL:     this.imageURL,
+        isAdmin:      this.userDetail.isAdmin,
+        name:         formData.name ? formData.name : this.userDetail.name  || '',
+        phoneNumber:  formData.phoneNumber ? formData.phoneNumber : this.userDetail.phoneNumber  || '',
+        gender:       formData.gender ? formData.gender : this.userDetail.gender  || '',
+        address:      formData.address ? formData.address : this.userDetail.address  || '',
+        city:         formData.city ? formData.city : this.userDetail.city  || '',
+        state:        formData.state ? formData.state : this.userDetail.state  || '',
+        zip:          formData.zip ? formData.zip : this.userDetail.zip  || 0,
+      };
+
+      this.userService.update(this.userDetail).then(
+        res => {
+          this.ngxLoader.stop();
+          this.alertify.success('Profile edited successfully !!!');
+        },
+        err => {
+          this.ngxLoader.stop();
+          this.alertify.error(err.message);
+        }
+      );
+    }
   }
 
   onFileInput(ev) {
@@ -150,26 +171,6 @@ export class EditProfileComponent {
       },
       err => {
         this.ngxLoader.stop('upload-image');
-        this.alertify.error(err.message);
-      }
-    );
-  }
-
-  checkExist() {
-    this.ngxLoader.start('check-exist');
-    const phone = this.userEditProfileForm.value.phoneNumber;
-    this.userService.checkExist('phoneNumber', phone).subscribe(
-      res => {
-        console.log(res);
-        if (res.length > 0) {
-          this.ngxLoader.stop('check-exist');
-          this.alertify.error('OOPS!!! This ' + phone + ' mobile number is already in use by another user');
-        } else {
-          this.editProfile();
-        }
-      },
-      err => {
-        this.ngxLoader.stop('check-exist');
         this.alertify.error(err.message);
       }
     );
