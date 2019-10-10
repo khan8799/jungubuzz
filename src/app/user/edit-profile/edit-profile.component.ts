@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { Router } from '@angular/router';
 import { UserDetail } from 'src/app/models/user-detail';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserService } from 'src/app/services/user.service';
@@ -13,7 +12,7 @@ import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/s
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent {
   userEditProfileForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl({value: '', disabled: true}),
@@ -36,12 +35,9 @@ export class EditProfileComponent implements OnInit {
     private auth: AuthService,
     private userService: UserService,
     private alertify: AlertifyService,
-    private route: Router,
     private ngxLoader: NgxUiLoaderService,
     private storage: AngularFireStorage,
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.ngxLoader.start();
     this.auth.user$.subscribe(
       res => {
@@ -51,7 +47,6 @@ export class EditProfileComponent implements OnInit {
       err => {
         this.ngxLoader.stop();
         this.alertify.error(err.message);
-        this.route.navigate(['/home']);
       }
     );
   }
@@ -84,7 +79,7 @@ export class EditProfileComponent implements OnInit {
       uid:          this.user.uid,
       displayName:  this.user.displayName,
       email:        this.user.email,
-      photoURL:     this.user.photoURL,
+      photoURL:     this.userDetail.photoURL ? this.userDetail.photoURL : this.user.photoURL,
       isAdmin:      this.userDetail.isAdmin,
       name:         formData.name ? formData.name : this.userDetail.name,
       phoneNumber:  formData.phoneNumber ? formData.phoneNumber : this.userDetail.phoneNumber,

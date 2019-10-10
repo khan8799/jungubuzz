@@ -32,8 +32,8 @@ export class AppComponent {
         return;
       }
 
-      localStorage.removeItem('returnUrl');
       this.ngxLoader.stop();
+      localStorage.removeItem('returnUrl');
       this.router.navigateByUrl(returnUrl);
     });
   }
