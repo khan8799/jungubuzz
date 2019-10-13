@@ -8,6 +8,28 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 })
 export class PaypalComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
+  private clientId = 'AYLohRnEGAYmm7soRUUwFxaM7x0hKRjL-S2T3Aw2PqSmntFx-WmfU43cYmRd2KYujXyp5IMc-1dQbdFn';
+  private currencyCode = 'INR';
+  private order = [
+    {
+      name: 'Bugatti Shoes',
+      quantity: '1',
+      category: 'DIGITAL_GOODS',
+      unit_amount: {
+        currency_code: 'INR',
+        value: '1',
+      },
+    },
+    {
+      name: 'Levis Jeans',
+      quantity: '1',
+      category: 'DIGITAL_GOODS',
+      unit_amount: {
+        currency_code: 'INR',
+        value: '1',
+      },
+    }
+  ];
 
   ngOnInit(): void {
     this.initConfig();
@@ -15,34 +37,24 @@ export class PaypalComponent implements OnInit {
 
   private initConfig(): void {
     this.payPalConfig = {
-      currency: 'EUR',
-      clientId: 'sb',
+      currency: this.currencyCode,
+      clientId: this.clientId,
       // tslint:disable-next-line: no-angle-bracket-type-assertion
       createOrderOnClient: (data) => <ICreateOrderRequest> {
         intent: 'CAPTURE',
-        purchase_units: [
+        purchase_units:  [
           {
             amount: {
-              currency_code: 'EUR',
-              value: '9.99',
+              currency_code: 'INR',
+              value: '2',
               breakdown: {
                 item_total: {
-                  currency_code: 'EUR',
-                  value: '9.99'
+                  currency_code: 'INR',
+                  value: '2'
                 }
               }
             },
-            items: [
-              {
-                name: 'Enterprise Subscription',
-                quantity: '1',
-                category: 'DIGITAL_GOODS',
-                unit_amount: {
-                  currency_code: 'EUR',
-                  value: '9.99',
-                },
-              }
-            ]
+            items: this.order
           }
         ]
       },
