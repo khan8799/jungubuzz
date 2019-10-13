@@ -27,6 +27,9 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { PhoneLoginComponent } from './login-method/phone-login/phone-login.component';
 import { PhoneSignupComponent } from './login-method/phone-signup/phone-signup.component';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
+import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
+import { PaypalComponent } from './payment-methods/paypal/paypal.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
     EmailSignupComponent,
     PhoneLoginComponent,
     PhoneSignupComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PaymentMethodsComponent,
+    PaypalComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
 
     NgxUiLoaderModule,
+    NgxPayPalModule,
   ],
   providers: [
     AuthService,

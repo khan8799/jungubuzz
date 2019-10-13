@@ -1,0 +1,24 @@
+
+
+  <div class="text-center">
+    <h1>Choose your payment options...</h1>
+    <p>Make your payment super easy using any of these payment methods</p>
+
+    <button 
+        (click)="paymentMethods('/paypal')" 
+        class="btn btn-outline-primary">
+            PayPal <i class="fa fa-paypal"></i>
+    </button>
+
+    <button
+        (click)="paymentMethods('/stripe')"
+        class="btn btn-outline-primary">
+            Stripe <i class="fa fa-cc-stripe"></i>
+    </button>
+
+    <button
+        (click)="paymentMethods('/debit-card')"
+        class="btn btn-outline-primary">
+            Master Card <i class="fa fa-cc-mastercard"></i>
+    </button>
+  </div>
