@@ -1,3 +1,5 @@
+import { PaypalComponent } from './payment-methods/paypal/paypal.component';
+import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -45,6 +47,16 @@ const routes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'payment-methods',
+    component: PaymentMethodsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'paypal',
+    component: PaypalComponent,
     canActivate: [AuthGuardService]
   }
 ];
