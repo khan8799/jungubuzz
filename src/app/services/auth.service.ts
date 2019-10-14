@@ -31,7 +31,7 @@ export class AuthService {
     if (socialLoginMethod === 'google')
       return this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     else if (socialLoginMethod === 'facebook')
-      return this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider());
+      return this.afAuth.auth.signInWithRedirect(new firebase.auth.FacebookAuthProvider()).catch(err => console.log(err));
     else if (socialLoginMethod === 'twitter')
       return  this.afAuth.auth.signInWithRedirect(new firebase.auth.TwitterAuthProvider());
   }

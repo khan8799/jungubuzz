@@ -19,6 +19,7 @@ export class AppComponent {
   ) {
     this.ngxLoader.start();
     this.auth.user$.subscribe(user => {
+      console.log(JSON.stringify(user));
       if (!user) {
         this.ngxLoader.stop();
         return;

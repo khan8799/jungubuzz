@@ -7,19 +7,19 @@
         <i class="fa fa-google"></i>
     </button>
 
-    <button type="button" class="btn btn-outline-primary" [routerLink]="['/facebook-login']">
+    <button  (click)="socialLogin('facebook')" class="btn btn-outline-primary">
       <i class="fa fa-facebook-f"></i>
     </button>
 
-    <button type="button" class="btn btn-outline-info" [routerLink]="['/twitter-login']">
+    <button class="btn btn-outline-info">
       <i class="fa fa-twitter"></i>
     </button>
 
-    <button type="button" class="btn btn-outline-dark" [routerLink]="['/email-login']">
+    <button class="btn btn-outline-dark" [routerLink]="['/email-login']">
       <i class="fa fa-envelope"></i>
     </button>
 
-    <button type="button" class="btn btn-outline-dark" [routerLink]="['/phone-login']">
+    <button class="btn btn-outline-dark" [routerLink]="['/phone-login']">
       <i class="fa fa-phone"></i>
     </button>
   </div>

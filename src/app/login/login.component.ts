@@ -19,18 +19,24 @@ export class LoginComponent implements OnInit {
   ) { }
 
   socialLogin(socialLoginMethod: string) {
-    this.auth.socialLogin(socialLoginMethod).then(
-      res => this.route.navigate(['/home']),
+    this.auth.socialLogin(socialLoginMethod)
+    .then(
+      res => console.log(res),
+      err => this.alertify.error(err.message)
+    )
+    .catch(
       err => this.alertify.error(err.message)
     );
   }
 
   ngOnInit() {
-    this.auth.appUser$.subscribe(appUser => {
-      if (appUser) {
-        this.route.navigate(['/home']);
-      }
-    });
+    this.auth.appUser$.subscribe(
+      appUser => {
+        if (appUser)
+          this.route.navigate(['/home']);
+      },
+      err => this.alertify.error(err.message)
+    );
   }
 
 }
