@@ -3,6 +3,7 @@ import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { AlertifyService } from './services/alertify.service';
 
 @Component({
   selector: 'app-root',
@@ -16,32 +17,29 @@ export class AppComponent {
     private auth: AuthService,
     private router: Router,
     private ngxLoader: NgxUiLoaderService,
+    private alertify: AlertifyService,
   ) {
     this.ngxLoader.start();
-    this.auth.user$.subscribe(user => {
-      console.log(JSON.stringify(user));
-      if (!user) {
+    this.auth.user$.subscribe(
+      user => {
         this.ngxLoader.stop();
-        return;
-      }
+        if (!user) return;
 
-      this.userService.checkUserExist(user.uid).subscribe(
-        userExist => {
-          if (!userExist)
-            this.userService.create(user);
-        },
-        err => console.log(err)
-      );
+        this.userService.checkUserExist(user.uid).subscribe(
+          userExist => {
+            if (!userExist) this.userService.create(user);
+          },
+          err => this.alertify.error(err.message)
+        );
 
-      const returnUrl = localStorage.getItem('returnUrl');
-      if (!returnUrl) {
-        this.ngxLoader.stop();
-        return;
-      }
+        const returnUrl = localStorage.getItem('returnUrl');
 
-      this.ngxLoader.stop();
-      localStorage.removeItem('returnUrl');
-      this.router.navigateByUrl(returnUrl);
-    });
+        if (!returnUrl) return;
+
+        localStorage.removeItem('returnUrl');
+        this.router.navigate([returnUrl]);
+      },
+      err => this.alertify.error(err.message)
+    );
   }
 }

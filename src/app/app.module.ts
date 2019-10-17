@@ -30,6 +30,9 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { PaypalComponent } from './payment-methods/paypal/paypal.component';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { AlertifyService } from './services/alertify.service';
+import { OrderService } from './services/order.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import { NgxPayPalModule } from 'ngx-paypal';
   ],
   providers: [
     AuthService,
+    AuthGuardService,
     UserService,
+    AlertifyService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

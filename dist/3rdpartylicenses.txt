@@ -546,6 +546,8 @@ Apache-2.0
    limitations under the License.
 
 
+ngx-paypal
+
 ngx-ui-loader
 MIT
 MIT License
