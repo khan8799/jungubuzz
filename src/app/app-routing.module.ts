@@ -1,3 +1,5 @@
+import { PaypalOrdersComponent } from './my-orders/paypal-orders/paypal-orders.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { PaypalComponent } from './payment-methods/paypal/paypal.component';
 import { PaymentMethodsComponent } from './payment-methods/payment-methods.component';
 import { HomeComponent } from './home/home.component';
@@ -57,6 +59,16 @@ const routes: Routes = [
   {
     path: 'paypal',
     component: PaypalComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'my-orders',
+    component: MyOrdersComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'paypal-orders',
+    component: PaypalOrdersComponent,
     canActivate: [AuthGuardService]
   }
 ];

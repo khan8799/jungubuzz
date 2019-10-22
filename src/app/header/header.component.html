@@ -13,6 +13,7 @@
         </button>
         <div class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink="edit-profile">Edit Profile</a>
+          <a class="dropdown-item" routerLink="my-orders">My Orders</a>
           <a class="dropdown-item" *ngIf="appUser" (click)="logout()">Logout</a>
         </div>
       </span>
