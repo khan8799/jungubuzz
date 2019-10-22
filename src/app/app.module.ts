@@ -13,6 +13,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+import { DataTablesModule } from 'angular-datatables';
+
 import { environment } from 'src/environments/environment.prod';
 
 import { AppComponent } from './app.component';
@@ -33,6 +35,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { AlertifyService } from './services/alertify.service';
 import { OrderService } from './services/order.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { PaypalOrdersComponent } from './my-orders/paypal-orders/paypal-orders.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { AuthGuardService } from './services/auth-guard.service';
     PhoneSignupComponent,
     EditProfileComponent,
     PaymentMethodsComponent,
-    PaypalComponent
+    PaypalComponent,
+    MyOrdersComponent,
+    PaypalOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +69,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 
     NgxUiLoaderModule,
     NgxPayPalModule,
+    DataTablesModule,
   ],
   providers: [
     AuthService,
