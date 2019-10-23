@@ -1,73 +1,37 @@
-    
-    <p class="text-danger">You clicked on: <strong>{{ message }}</strong></p>
-    <table datatable [dtOptions]="dtOptions" class="row-border hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-id="1" data-name="name" data-name="lname">
-            <td>1</td>
-            <td>Foo</td>
-            <td>Bar</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Someone</td>
-            <td>Youknow</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Iamout</td>
-            <td>Ofinspiration</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Yoda</td>
-            <td>Skywalker</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Patrick</td>
-            <td>Dupont</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Barack</td>
-            <td>Obama</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>François</td>
-            <td>Holland</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Michel</td>
-            <td>Popo</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Chuck</td>
-            <td>Norris</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Simon</td>
-            <td>Robin</td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>Louis</td>
-            <td>Lin</td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>Zelda</td>
-            <td>Link</td>
-        </tr>
-        </tbody>
-    </table>
+
+  <table *ngIf="orders else showLoader" datatable class="row-border hover">
+    <thead>
+      <tr>
+        <th>Ordered On</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.createdOn | date:'fullDate' }} at {{ order.createdOn | date:'shortTime' }}</td>
+        <td>{{ order.payerName }}</td>
+        <td>{{ order.payerEmail }}</td>
+        <td>
+          <a
+            [routerLink]="['/paypal-order-view', order.key]"
+            class="btn btn-sm btn-outline-primary">
+              <i class="fa fa-eye"></i> view
+          </a>
+          <button
+            (click)="refund(order.key)"
+            type="button"
+            class="btn btn-sm btn-outline-info">
+              refund
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #showLoader>
+    <div class="text-center pb-4">
+      <img src="../../../assets/img/loader.gif" alt="">
+    </div>
+  </ng-template>

@@ -37,6 +37,7 @@ import { OrderService } from './services/order.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { PaypalOrdersComponent } from './my-orders/paypal-orders/paypal-orders.component';
+import { PaypalOrderViewComponent } from './my-orders/paypal-order-view/paypal-order-view.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PaypalOrdersComponent } from './my-orders/paypal-orders/paypal-orders.c
     PaymentMethodsComponent,
     PaypalComponent,
     MyOrdersComponent,
-    PaypalOrdersComponent
+    PaypalOrdersComponent,
+    PaypalOrderViewComponent
   ],
   imports: [
     BrowserModule,

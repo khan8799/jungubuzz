@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PaypalService } from 'src/app/services/paypal.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+declare let alertify: any;
 
 @Component({
   selector: 'app-paypal-orders',
@@ -6,34 +11,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paypal-orders.component.scss']
 })
 export class PaypalOrdersComponent implements OnInit {
-  message = '';
-  dtOptions: DataTables.Settings = {};
+  orders;
+  userID: string;
+  orderID: string;
 
-  constructor() { }
-
-  someClickHandler(info: any): void {
-    this.message = info.id + ' - ' + info.firstName;
-  }
+  constructor(
+    private paypalService: PaypalService,
+    private alertifyService: AlertifyService,
+    private authService: AuthService,
+    private route: Router,
+  ) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      // tslint:disable-next-line: ban-types
-      rowCallback: (row: Node, data: any[] | Object, index: number) => {
-        const self = this;
-        // Unbind first in order to avoid any duplicate handler
-        // (see https://github.com/l-lin/angular-datatables/issues/87)
-        // tslint:disable-next-line: deprecation
-        $('td', row).unbind('click');
-        // tslint:disable-next-line: deprecation
-        $('td', row).bind('click', () => {
-          self.someClickHandler(data);
-          console.log(row);
-          console.log(data);
-          console.log(index);
-        });
-        return row;
+    this.authService.afAuth.auth.onAuthStateChanged(user => {
+      if (user) {
+        try {
+          this.userID = user.uid;
+
+          this.paypalService.getOrders(this.userID).subscribe(
+            (item: any) => {
+              this.orders = item.filter(ut => {
+                if (ut.payerID)
+                  return true;
+              });
+            },
+            err => this.alertifyService.error(err)
+          );
+        } catch (error) {
+          this.alertifyService.error(error);
+        }
       }
-    };
+    });
+  }
+
+  refund(orderID: string) {
+    this.orderID = orderID;
+    alertify.confirm(
+      'Refund/Cancel Order',
+      'Are you sure you really want to initiate refund? This will also cancel your order.',
+      () => {
+        // Initiate refund
+      },
+      () => {
+        // Do nothing
+      }
+    );
   }
 
 }

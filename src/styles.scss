@@ -8,7 +8,7 @@ button {
   margin: 5px;
 }
 
-body a {
+body, a {
   font-size: 14px;
   color: #6c757d !important;
   text-decoration: none !important;
@@ -21,4 +21,12 @@ body a {
 a:hover {
   font-size: 15px;
   color: #545b62 !important;
+}
+
+button, a.btn {
+  border-radius: 0px !important;
+}
+
+a.btn:hover {
+  color: white !important;;
 }

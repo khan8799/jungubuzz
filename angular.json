@@ -30,6 +30,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/alertifyjs/build/css/alertify.css",
+              "node_modules/alertifyjs/build/css/themes/default.min.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [

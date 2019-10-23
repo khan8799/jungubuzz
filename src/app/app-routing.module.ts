@@ -12,6 +12,7 @@ import { PhoneLoginComponent } from './login-method/phone-login/phone-login.comp
 import { PhoneSignupComponent } from './login-method/phone-signup/phone-signup.component';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { PaypalOrderViewComponent } from './my-orders/paypal-order-view/paypal-order-view.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,11 @@ const routes: Routes = [
   {
     path: 'paypal-orders',
     component: PaypalOrdersComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'paypal-order-view/:orderID',
+    component: PaypalOrderViewComponent,
     canActivate: [AuthGuardService]
   }
 ];
