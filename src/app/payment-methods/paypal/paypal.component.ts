@@ -94,13 +94,17 @@ export class PaypalComponent implements OnInit {
         color: 'blue'
       },
       onApprove: (data: IOnApproveCallbackData, actions) => {
+        console.log(data);
+        console.log(actions);
         this.approvedOnly(data);
 
         actions.order.get().then(details => {
+          console.log(details);
           this.approvedAndAuthorised(details);
         });
       },
       onClientAuthorization: (data) => {
+        console.log(data);
         this.clientAuthorization(data);
       },
       onCancel: (data, actions) => {
@@ -133,12 +137,6 @@ export class PaypalComponent implements OnInit {
   | - Handle the error very carefully with proper message to the user
   */
   errorOccured(err: string) {
-    // try {
-    //   this.alertifyService.error(err);
-    // } catch (err) {
-    //   this.alertifyService.error(err);
-    // }
-
     this.route.navigate(['/payment-methods']);
   }
 
@@ -208,8 +206,10 @@ export class PaypalComponent implements OnInit {
       INTENT    === this.orderService.intent
     ) {
       // Store data on server & show payment successfull message with order id to user
-      const name = details.payer.name;
-      const data = details.purchase_units[0];
+      const name        = details.payer.name;
+      const data        = details.purchase_units[0];
+      const captureID   = data.payments.captures[0].id;
+      const links       = data.payments.captures[0].links;
 
       const updateOrderDetails = {
         updateTime: details.update_time,
@@ -219,6 +219,8 @@ export class PaypalComponent implements OnInit {
         itemPurchased: data.items,
         shippingAddress: data.shipping.address,
         totalAmount: data.amount.value,
+        captureID,
+        links,
       };
 
       try {

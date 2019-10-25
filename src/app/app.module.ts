@@ -14,6 +14,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { DataTablesModule } from 'angular-datatables';
+import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment.prod';
 
@@ -72,6 +73,7 @@ import { PaypalOrderViewComponent } from './my-orders/paypal-order-view/paypal-o
     NgxUiLoaderModule,
     NgxPayPalModule,
     DataTablesModule,
+    HttpClientModule,
   ],
   providers: [
     AuthService,
