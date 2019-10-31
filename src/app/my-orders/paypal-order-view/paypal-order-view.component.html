@@ -38,10 +38,12 @@
           <div class="col-md-6 text-right">
             <address>
               <strong>Shipped To:</strong><br>
-              Elaine Hernandez<br>
-              P. Sherman 42,<br>
-              Wallaby Way, Sidney<br>
-              <abbr title="Phone">P:</abbr> (123) 345-6789
+              {{ orderList.payerName }}<br>
+              {{ orderList.shippingAddress.address_line_1 }}<br>
+              {{ orderList.shippingAddress.address_line_2 }}<br>
+              {{ orderList.shippingAddress.admin_area_1 + ', ' + orderList.shippingAddress.admin_area_2 }}<br>
+              {{ orderList.shippingAddress.postal_code }}<br>
+              <!-- <abbr title="Phone">P:</abbr> (123) 345-6789 -->
             </address>
           </div>
         </div>
@@ -50,7 +52,7 @@
           <div class="col-md-6">
             <address>
               <strong>Payment Method:</strong><br>
-              {{ orderList?.fundingSource }}<br>
+              {{ orderList?.fundingSource || 'paypal' }}<br>
               {{ orderList?.payerEmail }}<br>
             </address>
           </div>

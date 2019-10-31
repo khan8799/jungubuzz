@@ -17,13 +17,13 @@
           <a
             [routerLink]="['/paypal-order-view', order.key]"
             class="btn btn-sm btn-outline-primary">
-              <i class="fa fa-eye"></i> view
+              <i class="fa fa-eye"></i> order detail
           </a>
           <button
             (click)="refund(order.key)"
             type="button"
             class="btn btn-sm btn-outline-info">
-              refund
+              refund/cancel order
           </button>
         </td>
       </tr>

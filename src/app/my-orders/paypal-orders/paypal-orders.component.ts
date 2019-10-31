@@ -55,7 +55,7 @@ export class PaypalOrdersComponent implements OnInit {
   }
 
   getCaptureID() {
-    
+
   }
 
   refund(orderID: string) {
@@ -66,11 +66,8 @@ export class PaypalOrdersComponent implements OnInit {
       'Refund/Cancel Order',
       'Are you sure you really want to initiate refund? This will also cancel your order.',
       () => {
-        // Initiate refund
-        this.http.get(url, this.httpOptions).subscribe(
-          res => console.log(res),
-          err => console.log(err)
-        );
+        // Get Paypal Access Token First
+        this.paypalService.initiateRefund();
       },
       () => {
         // Do nothing
