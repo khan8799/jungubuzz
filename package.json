@@ -26,7 +26,7 @@
     "alertifyjs": "^1.12.0",
     "angular-datatables": "^8.0.0",
     "bootstrap": "^4.3.1",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.10.22",
     "datatables.net-dt": "^1.10.20",
     "firebase": "^6.6.2",
     "firebaseui": "^4.2.0",
